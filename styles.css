@@ -1,0 +1,23 @@
+/* You can code CSS here */
+body {
+    background-color: #496a4d;
+}
+h1 {
+	color: #DAA520;
+	
+	text-align: center;
+	
+}
+
+h3 {
+	color: white;
+	text-align: center;
+	height: 70px;
+}
+
+p{
+	color: white;
+	font-weight: bold;
+	text-align: center;
+
+}
