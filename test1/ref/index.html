@@ -1,0 +1,217 @@
+<html lang="en">
+ <head>
+  <link rel='manifest' href='manifest.json'>
+  <link rel='stylesheet' href='styles.css'>
+  <script src='aframe.js'></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+ </head>
+ <body>
+ <h1> NJCU Virtual Reality Tour! </h1>
+ <h3> If you move or drag around, you can see the gated JFK Entrance, along with the security booth posted  on the right side of the entry. </h3>
+ 
+ <script>
+ 
+ var stairsEvent;
+ 
+window.onload = function(){
+
+	
+/* AFRAME.registerComponent('change-background', {
+	schema:{
+		event: {
+		type: 'string', default: ''},
+		
+	   },
+	   src: {type: 'string', default: ''}
+		},
+	   init: function(){
+		var self = this;
+		
+		this.eventHandlerFn = function (){
+			console.log(self.data.message);
+			};
+		},
+	   
+	   update: function(oldData){
+	     var data = this.data;
+		 var el = this.el;
+		 
+		 if(oldData.event && data.event !== oldData.event){
+			el.removeEventListener(oldData.event, this.eventHandlerFn);
+		}
+		 
+		 if(data.event){
+		 
+			el.addEventListener(data.event, this.eventHandlerFn);
+		  else{
+			console.log(data.message);
+			}
+		  }
+		}
+	});*/
+
+$ = (queryString) => document.querySelector(queryString);
+
+	
+	var sceneEl = document.querySelector('a-scene');
+	//alert(sceneEl);
+	var plane1text = $('#stairsPlaneText');
+	alert(plane1text);
+	var env1 = $('#environment');
+	var environment1 = (env1.getAttribute('src'));
+	
+	
+	alert(plane1text.getAttribute('value'));
+	//plane1text.setAttribute('value', 'Hello again!');
+	
+	/*if(env1.getAttribute('src') == '#JFKentrance')
+	{
+		plane1text.setAttribute('value', 'Hello again!');
+		alert(plane1text.getAttribute('value'));
+	}*/
+	
+	var stairsPlane = $('#stairsPlane');
+	stairsEvent = stairsPlane.getAttribute('event-set__click');
+	alert(stairsEvent);
+	
+	var click=true;
+	
+    stairsEvent.emit('clicked', {_event: click}, false);
+	
+	stairsEvent.addEventListener('clicked', function(event){
+		alert('I have been clicked!');
+	});
+	
+	/*var time = 10000;
+	
+	function test()
+	{
+		//alert('wattup');
+		alert(env1.getAttribute('src'));
+		//alert(plane1text.getAttribute('value'));
+		if(document.getElementById("environment").getAttribute("src") == "#libraryWalk")
+		{
+			plane1text.setAttribute('value', 'Hello again!');
+			alert(plane1text.getAttribute('value'));
+			//coonsole(plan.getAttribute('value'));
+		}
+		//else {time+=20;}
+		//console.log('go to work');
+		setTimeout(test(), time);
+		
+		
+	}
+	
+	setTimeout(test(), time);
+	*/
+	
+	
+	
+	
+
+	
+
+	/*const animate = null;
+	
+	animate() => {
+		if(env1.getAttribute('src') == '#libraryWalk')
+		{
+			plane1text.setAttribute('value', 'Hello again!');
+		};
+		requestAnimationFrame(animate);
+	};
+	
+	requestAnimationFrame(animate); */
+	
+	//alert(plane1text.getAttribute('value'));
+	
+	
+	
+
+	
+	
+	
+	
+
+ };
+ 
+</script>
+
+
+ 
+  <a-scene embedded style="width: 100%; height: 600px">
+    <a-assets>
+	  <audio id="clickSound" src="click.wav"> </audio>
+	  
+	
+	  <img id="JFKentrance" src="entrance.jpg">
+	  <img id="libraryWalk" src="libraryWalk.jpg">
+	  <img id="libraryFront" src="libraryFront.jpg">
+	  
+	  
+	  
+	</a-assets>
+	
+	
+	<a-entity>
+	<a-plane id="stairsPlane" class="link" position="0 1 -4" rotation="0 0 0" width="0.5" height="0.5" color="gray"
+		sound="on:click; src: #clickSound"
+		event-set__enter="_event: mouseenter; _target: #stairsPlaneText; visible: true"
+		event-set__leave="_event: mouseleave; _target: #stairsPlaneText; visible: false"
+		event-set__click="_event: click; _target: #environment; src: #libraryWalk"
+		begin="click"
+		>
+	  
+	  <a-text id="stairsPlaneText" value="Click here to see more of NJCU!" align="center" color="#FFF" 
+			  visible="false"> </a-text>
+	  
+	  <a-animation attribute="position" to="0 1.2 -4" direction="alternate" dur="2000"
+	  repeat="indefinite"></a-animation>
+	  
+	  <a-animation attribute="width" begin="mouseenter" dur="300" to="4"></a-animation>
+	  <a-animation attribute="width" begin="mouseleave" dur="300" to="0.5"></a-animation>
+	  
+	
+	</a-plane>
+	</a-entity>
+
+	<a-sky id="environment" src="#JFKentrance" radius="10"> </a-sky>
+	
+	<!-- not visible -->
+	
+	<!--<a-entity class="link"
+		geometry="primitive: plane; height: 1; width:1"
+		material="shader: flat; src: #libraryWalk-thumb"
+		sound="on:click; src: #clickSound"></a-entity>-->
+	
+
+		
+	
+	<a-camera>
+	  <a-cursor id="cursor">
+	    <a-animation begin="click" easing="ease-in" attribute="scale"
+					 fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150">
+		</a-animation>
+		
+		<a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+					from="1 1 1" to="0.1 0.1 0.1" dur="1500">
+		</a-animation>
+		
+	<a-camera>
+	  
+	
+  </a-scene>
+ 
+
+ <p> Straight ahead past the stairs is Hepburn Hall. In here are: 
+ <p>registrar's office 
+ <p> bursar's office
+ <p> financial aid office </p>
+ </p>
+ </p>
+ </p>
+ <h3> click <a href="libraryWalk.html"> here </a> to walk down the steps and see more of NJCU! 
+   <p> click <a href="insideHepburn.html"> here </a> to enter Hepburn Hall! </p>
+ </h3>
+ </body>
+</html>
